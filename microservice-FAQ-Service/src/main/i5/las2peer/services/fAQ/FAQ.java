@@ -43,7 +43,7 @@ import java.io.*;
  * outsourced to (imported) classes.
  *
  */
-@ServicePath("http://localhost:9081")
+@ServicePath("faq")
 public class FAQ extends RESTService {
 
 

@@ -49,7 +49,7 @@ public class FAQTest {
   // version does not matter in tests
   private static final ServiceNameVersion testTemplateService = new ServiceNameVersion(FAQ.class.getCanonicalName(),"0.1");
 
-  private static final String mainPath = "http://localhost:9081";
+  private static final String mainPath = "faq";
 
 
   /**
