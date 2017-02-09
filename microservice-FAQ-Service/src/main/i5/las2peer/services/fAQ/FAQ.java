@@ -118,7 +118,8 @@ public class FAQ extends RESTService {
             PreparedStatement stmnt = conn.prepareStatement("INSERT INTO faq  (question, answer) VALUES (?,?)");
             stmnt.setString(1, question[1]); 
             stmnt.setString(2, answer[1]);
-            stmnt.executeUpdate();
+            stmnt.executeUpdate(); 
+            stmnt.close();
             result.put("message", "successfully added Question: '"+question +"'"); 
         }
         return Response.status(HttpURLConnection.HTTP_OK).entity(result.toJSONString()).build();
@@ -157,7 +158,8 @@ public class FAQ extends RESTService {
     try {
         Connection conn = service.dbm.getConnection();
         PreparedStatement stmnt = conn.prepareStatement("SELECT id, question,answer FROM faq");
-        ResultSet rs = stmnt.executeQuery();
+        ResultSet rs = stmnt.executeQuery(); 
+        stmnt.close();
         JSONArray result = new JSONArray();
         while (rs.next()) { 
             JSONObject obj = new JSONObject();
