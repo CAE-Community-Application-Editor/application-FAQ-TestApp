@@ -93,7 +93,7 @@ public class FAQ extends RESTService {
    * 
    * postFAQ
    * 
-   * @param data a JSONObject 
+   * @param data a String 
    * 
    * @return Response  
    * 
@@ -107,18 +107,20 @@ public class FAQ extends RESTService {
   })
   @ApiOperation(value = "postFAQ", notes = " ")
   public Response postFAQ(String data) {
-    JSONObject data_JSON = (JSONObject) JSONValue.parse(data);
 
-    try {
-        String question = (String) data_JSON.get("question"); 
-        String answer = (String) data_JSON.get("answer");
+    try { 
+        String[] requestData = data.split("&");
+        String[] question = requestData[0].split("=")); 
+        String[] answer = requestData[1].split("=");  
+        if(question.length>1&&answer.length>1){
         Connection conn = service.dbm.getConnection();
         PreparedStatement stmnt = conn.prepareStatement("INSERT INTO faq  (question, answer) VALUES (?,?)");
-        stmnt.setString(1, question); 
-        stmnt.setString(2, answer);
+        stmnt.setString(1, question[1]); 
+        stmnt.setString(2, answer[1]);
         stmnt.executeUpdate();
         JSONObject result = new JSONObject();
-        result.put("message", "successfully added Question: '"+question +"'");
+        result.put("message", "successfully added Question: '"+question +"'"); 
+        }
         return Response.status(HttpURLConnection.HTTP_OK).entity(result.toJSONString()).build();
     } catch (Exception e) { 
         StringWriter sw = new StringWriter();

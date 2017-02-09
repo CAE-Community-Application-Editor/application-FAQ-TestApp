@@ -99,10 +99,10 @@ public class FAQTest {
     MiniClient c = new MiniClient();
     c.setAddressPort(HTTP_ADDRESS, HTTP_PORT);
     try {
-      JSONObject data = new JSONObject();
+      String data = "initialized";
       c.setLogin(Long.toString(testAgent.getId()), testPass);
-      ClientResponse result = c.sendRequest("POST", mainPath + "/", data.toJSONString(),
-        MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN, new HashMap<String,String>());
+      ClientResponse result = c.sendRequest("POST", mainPath + "/", data,
+        MediaType.TEXT_PLAIN, MediaType.TEXT_PLAIN, new HashMap<String,String>());
       assertTrue(true); // change here
       System.out.println("Result of 'testpostFAQ': " + result.getResponse().trim());
     } catch (Exception e) {
