@@ -110,16 +110,16 @@ public class FAQ extends RESTService {
 
     try { 
         String[] requestData = data.split("&");
-        String[] question = requestData[0].split("=")); 
+        String[] question = requestData[0].split("="); 
         String[] answer = requestData[1].split("=");  
         if(question.length>1&&answer.length>1){
-        Connection conn = service.dbm.getConnection();
-        PreparedStatement stmnt = conn.prepareStatement("INSERT INTO faq  (question, answer) VALUES (?,?)");
-        stmnt.setString(1, question[1]); 
-        stmnt.setString(2, answer[1]);
-        stmnt.executeUpdate();
-        JSONObject result = new JSONObject();
-        result.put("message", "successfully added Question: '"+question +"'"); 
+            Connection conn = service.dbm.getConnection();
+            PreparedStatement stmnt = conn.prepareStatement("INSERT INTO faq  (question, answer) VALUES (?,?)");
+            stmnt.setString(1, question[1]); 
+            stmnt.setString(2, answer[1]);
+            stmnt.executeUpdate();
+            JSONObject result = new JSONObject();
+            result.put("message", "successfully added Question: '"+question +"'"); 
         }
         return Response.status(HttpURLConnection.HTTP_OK).entity(result.toJSONString()).build();
     } catch (Exception e) { 
