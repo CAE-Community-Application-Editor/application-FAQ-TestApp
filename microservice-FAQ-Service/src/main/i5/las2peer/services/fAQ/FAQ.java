@@ -159,7 +159,6 @@ public class FAQ extends RESTService {
         Connection conn = service.dbm.getConnection();
         PreparedStatement stmnt = conn.prepareStatement("SELECT id, question,answer FROM faq");
         ResultSet rs = stmnt.executeQuery(); 
-        stmnt.close();
         JSONArray result = new JSONArray();
         while (rs.next()) { 
             JSONObject obj = new JSONObject();
@@ -167,7 +166,8 @@ public class FAQ extends RESTService {
             obj.put("question", rs.getString(2)); 
             obj.put("answer",rs.getString(3));
             result.add(obj);
-        }
+        } 
+        stmnt.close();
         return Response.status(HttpURLConnection.HTTP_OK).entity(result.toJSONString()).build();
     } catch (Exception e) { 
         StringWriter sw = new StringWriter();
