@@ -107,8 +107,9 @@ public class FAQ extends RESTService {
   })
   @ApiOperation(value = "postFAQ", notes = " ")
   public Response postFAQ(String data) {
-
-    try { 
+    
+    try {  
+        JSONObject result = new JSONObject();
         String[] requestData = data.split("&");
         String[] question = requestData[0].split("="); 
         String[] answer = requestData[1].split("=");  
@@ -118,7 +119,6 @@ public class FAQ extends RESTService {
             stmnt.setString(1, question[1]); 
             stmnt.setString(2, answer[1]);
             stmnt.executeUpdate();
-            JSONObject result = new JSONObject();
             result.put("message", "successfully added Question: '"+question +"'"); 
         }
         return Response.status(HttpURLConnection.HTTP_OK).entity(result.toJSONString()).build();
